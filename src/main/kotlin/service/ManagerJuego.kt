@@ -1,0 +1,4 @@
+﻿package service
+
+class ManagerJuego {
+}
