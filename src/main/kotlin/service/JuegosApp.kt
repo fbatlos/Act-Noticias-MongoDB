@@ -34,20 +34,31 @@ class JuegosApp {
                 )
             }.toList()
 
+        if (buscarGenero.isEmpty()){
+            println("No se ha encontrado ese genero")
+        }
+
         return buscarGenero
     }
 
 
     fun registrarJuego(juego: Juego): String {
-        if (juego.titulo.isBlank()){
-            return "Error: El titulo es un campo obligatorio"
+        if (juego.titulo.isBlank() || juego.precio <= 0){
+            return "Error: Falta algun campo del juego."
         }
-
 
         val existe = collection.find(org.bson.Document("titulo", juego.titulo)).first() != null
 
         if (existe) {
-            return "Error: Ya existe un juego con el titulo '${juego.titulo}'"
+
+            return ("Error: Ya existe un juego con el titulo '${juego.titulo}'")
+
+            /* No se puede hacer ciclica porque hace la inyeccion de todas la veces fallada
+            println("Dame otro titulo: ")
+            juego.titulo = readLine() ?: ""
+
+            registrarJuego(juego)
+             */
         }
 
         collection.insertOne(
@@ -55,7 +66,7 @@ class JuegosApp {
                 .append("titulo", juego.titulo)
                 .append("genero", juego.genero)
                 .append("precio", juego.precio)
-                .append("fechaLanzamiento", juego.fecha_lanzamiento)
+                .append("fecha_lanzamiento", juego.fecha_lanzamiento)
         )
         return "Juego registrado exitosamente."
     }
@@ -73,7 +84,7 @@ class JuegosApp {
             org.bson.Document("\$set", org.bson.Document()
                 .append("genero", nuevosDatos.genero)
                 .append("precio", nuevosDatos.precio)
-                .append("fechaLanzamiento", nuevosDatos.fecha_lanzamiento)
+                .append("fecha_lanzamiento", nuevosDatos.fecha_lanzamiento)
             )
         )
         return if (resultado.matchedCount > 0) {
