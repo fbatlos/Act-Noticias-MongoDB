@@ -2,7 +2,7 @@ package model
 
 import java.util.Date
 
-data class Juegos(
+data class Juego(
     val titulo:String,
     val genero:String,
     val precio:Double,
