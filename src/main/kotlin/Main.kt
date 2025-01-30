@@ -1,67 +1,78 @@
-import database.ConexionBD
-import model.Juego
-import service.JuegosApp
+import com.mongodb.client.MongoCollection
+import com.mongodb.client.model.Filters
+import database.ConexionMongo
+import model.Cliente
+import model.Direccion
+import model.Noticia
+import org.bson.types.ObjectId
 import java.util.*
 
 fun main() {
-    while (true) {
-        println("1. Listar juegos")
-        println("2. Buscar juegos por género")
-        println("3. Registrar nuevo juego")
-        println("4. Eliminar juegos por género")
-        println("5. Modificar juego")
-        println("6. Salir")
-        print("Elige una opción: ")
 
-        when (readLine()?.toIntOrNull()) {
-            1 -> {
-                val juegos = JuegosApp().listarJuegos()
-                juegos.forEach { println(it) }
-            }
-            2 -> {
-                print("Introduce el genero: ")
-                val genero = readLine() ?: ""
-                val juegos = JuegosApp().buscarPorGenero(genero)
-                juegos.forEach { println(it) }
-            }
-            3 -> {
-                print("Introduce el titulo: ")
-                val titulo = readLine() ?: ""
-                print("Introduce el genero: ")
-                val genero = readLine() ?: ""
-                print("Introduce el precio: ")
-                val precio = readLine()?.toDoubleOrNull() ?: 0.0
+    // Abrir la conexión con la BD
+    val database = ConexionMongo.getDatabase("adaprueba")
 
-                //print("Introduce la fecha de lanzamiento: ")
-                val fecha = Date()
+    // Obtener la colección
+    val collectionUsuario: MongoCollection<Cliente> = database.getCollection("collUsuarios", Cliente::class.java)
 
-                val mensaje = JuegosApp().registrarJuego(Juego(titulo, genero, precio, fecha))
-                println(mensaje)
-            }
-            4 -> {
-                print("Introduce el genero a eliminar: ")
-                val genero = readLine() ?: ""
-                val mensaje = JuegosApp().eliminarPorGenero(genero)
-                println(mensaje)
-            }
-            5 -> {
-                print("Introduce el título del juego a modificar: ")
-                val titulo = readLine() ?: ""
-                print("Introduce el nuevo género: ")
-                val genero = readLine() ?: ""
-                print("Introduce el nuevo precio: ")
-                val precio = readLine()?.toDoubleOrNull() ?: 0.0
-                //print("Introduce la nueva fecha de lanzamiento: ")
-                val fecha = Date()
-                val mensaje = JuegosApp().modificarJuego(titulo, Juego(titulo, genero, precio, fecha))
-                println(mensaje)
-            }
-            6 -> {
-                ConexionBD.close()
-                println("Saliendo...")
-                break
-            }
-            else -> println("Opción no válida")
+    val collectionNoticias: MongoCollection<Noticia> = database.getCollection("collNoticias", Noticia::class.java)
+    /*
+        try {
+            // Declarar un cliente y una direccion
+            val direccion = Direccion("alamo", "24", "04638", "Mojacar")
+            val cliente = Cliente("maria@gmail.com", "Maria", "mar14", true, listOf("950475656", "666888999"), direccion)
+
+            collection.insertOne(cliente)
+
+            val direccion2 = Direccion("desconocida", "24", "04003", "Almeria")
+            val direccion3 = Direccion("principal", "2", "04003", "Almeria")
+            val direccion4 = Direccion("principal", "1", "04003", "Almeria")
+
+            val cliente2 = Cliente("pedro@gmail.com", "Pedro", "periko", true, listOf("950475656", "666888999"), direccion2)
+            val cliente3 = Cliente("ana@gmail.com", "Ana", "anuski", true, listOf("950475656", "666888999"), direccion3)
+            val cliente4 = Cliente("antonio@gmail.com", "Antonio", "toni", true, listOf("950475656", "666888999"), direccion4)
+            val cliente5 = Cliente("agustin@gmail.com", "Agustin", "agus", true, listOf("950475656", "666888999"), direccion4)
+
+            val listaClientes = listOf<Cliente>(
+                cliente2, cliente3, cliente4, cliente5
+            )
+
+            collection.insertMany(listaClientes)
+        } catch (e: Exception) {
+            println("Clave duplicada")
         }
-    }
+
+     */
+
+    val filtro = Filters.eq("","99938")
+
+    println(collectionUsuario.countDocuments(filtro))
+
+    println(collectionUsuario.find(filtro).count())
+
+    //Insertar una noticia
+
+    //1º Cogemos el usuario
+
+
+    val usuarioNoticia = collectionUsuario.find().toList()
+
+    println(usuarioNoticia.count())
+
+    val usuario = usuarioNoticia.random()
+
+
+    //2º hacemos la noticia
+
+    val noticia = Noticia(
+        ObjectId(),"La clase salta por los aires","Holaaaaaaaaa",
+        Date(), listOf("boom","atun"),usuario.nick)
+
+    collectionNoticias.insertOne(noticia)
+
+
+
+
+
+    ConexionMongo.close()
 }
