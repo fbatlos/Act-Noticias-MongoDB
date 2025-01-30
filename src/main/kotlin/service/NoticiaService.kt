@@ -57,4 +57,5 @@ class NoticiaService(val collNoticia:MongoCollection<Noticia>, val collCliente: 
         val noticias = collNoticia.find().sort(Sorts.descending("fecha_pub")).limit(10).toList()
         return noticias
     }
+
 }

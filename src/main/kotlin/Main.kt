@@ -7,6 +7,7 @@ import model.Direccion
 import model.Noticia
 import org.bson.types.ObjectId
 import service.ClienteService
+import service.ComentarioService
 import service.NoticiaService
 import java.util.*
 
@@ -43,13 +44,9 @@ fun main() {
 
 
 
+    val comentarioService = ComentarioService(collectionComentario,collectionUsuario,collectionNoticias)
 
-
-    val noticiasUser = noticiaService.findByFecha()
-
-
-    var index = 1
-    noticiasUser?.forEach { noticia -> println("${index++} - $noticia") }
+    comentarioService.insertarComentario(Comentario(ObjectId(),null,null,"Buena noticia crack", Date()),"Morrsssi","2")
 
 
     ConexionMongo.close()
