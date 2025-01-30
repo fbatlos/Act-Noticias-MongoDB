@@ -33,19 +33,26 @@ fun main() {
     val noticiaService: NoticiaService = NoticiaService(collectionNoticias, collectionUsuario)
 
     /*Insert
-    noticiaService.insertarNoticia(Noticia(ObjectId(),"Las cabras vuelan","Pepe de teruel a visto una cabra volando",
+    noticiaService.insertarNoticia(Noticia(ObjectId(),"6","6",
         Date(),
-        listOf(),
+        listOf("mol"),
         null
-    ), "paco17")7
+    ), "Runcho")
 
      */
 
-    val noticiasUser = noticiaService.findByNick("paco")
 
-    println(noticiasUser)
 
-    noticiasUser?.forEach { noticia -> println(noticia) }
+
+
+    val noticiasUser = noticiaService.findByFecha()
+
+
+    var index = 1
+    noticiasUser?.forEach { noticia -> println("${index++} - $noticia") }
+
 
     ConexionMongo.close()
 }
+
+

@@ -2,8 +2,10 @@
 
 import com.mongodb.client.MongoCollection
 import com.mongodb.client.model.Filters
+import com.mongodb.client.model.Sorts
 import model.Cliente
 import model.Noticia
+import java.util.Date
 
 class NoticiaService(val collNoticia:MongoCollection<Noticia>, val collCliente: MongoCollection<Cliente>) {
 
@@ -43,5 +45,16 @@ class NoticiaService(val collNoticia:MongoCollection<Noticia>, val collCliente: 
         }
     }
 
+    fun findByTag(tags: List<String>): List<Noticia>? {
+        val filtro = Filters.all("tag", tags)
 
+        val noticias  = collNoticia.find(filtro).toList()
+
+        return noticias
+    }
+
+    fun findByFecha(): List<Noticia> {
+        val noticias = collNoticia.find().sort(Sorts.descending("fecha_pub")).limit(10).toList()
+        return noticias
+    }
 }
