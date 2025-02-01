@@ -33,8 +33,19 @@ class ComentarioService(val collComentarios: MongoCollection<Comentario>, val co
         }else{
             println("No existe el usuario.")
         }
+    }
 
+    fun getComentariosByNoticia(noticiaId: String): List<Comentario>? {
+        val filtroComentario = Filters.eq("noticia",noticiaId)
 
+        val comentarios = collComentarios.find(filtroComentario).toList()
+
+        if (comentarios.isNotEmpty()) {
+            return comentarios
+        }else{
+            println("No existe la noticia.")
+            return null
+        }
     }
 
 }
