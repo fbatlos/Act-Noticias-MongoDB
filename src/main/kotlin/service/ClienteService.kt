@@ -8,6 +8,8 @@ import org.bson.types.ObjectId
 
 class ClienteService(val coll : MongoCollection<Cliente>) {
 
+    //Insertaremos a los clientes nuevos cuyo email o nick no existan ya en la bd
+
     fun insertarCliente(cliente: Cliente) {
 
         val filtros = Filters.or(
@@ -19,13 +21,12 @@ class ClienteService(val coll : MongoCollection<Cliente>) {
 
         if (userExist.count() == 0) {
             coll.insertOne(cliente)
+            println("Fue regsitrado correctamente.")
         }else{
             println("El usuario ya existe.")
         }
-
-
     }
-
+//Funcion añadida para eliminar usuarios
     fun deleteCliente(email:String) {
         val filtro = Filters.eq("_id", email)
 

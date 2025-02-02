@@ -9,6 +9,7 @@ import java.util.Date
 
 class NoticiaService(val collNoticia:MongoCollection<Noticia>, val collCliente: MongoCollection<Cliente>) {
 
+    //Comprobamos si el usuario que redacta la notica existe, tras eso comprobamos si esta activo y si ha añadido algun tagy si toddo esta en orden se insertará
     fun insertarNoticia(noticia: Noticia, usuario:String) {
         val filtroUser = Filters.eq("nick",usuario)
 
@@ -34,7 +35,7 @@ class NoticiaService(val collNoticia:MongoCollection<Noticia>, val collCliente: 
     fun allNoticias(): List<Noticia>? {
         return  collNoticia.find().toList()
     }
-
+//Buscamos la noticia por el nick del usuario
     fun findByNick(nick:String): List<Noticia>? {
         val noticiasNick = collNoticia.find(Filters.eq("user", nick)).toList()
 
@@ -44,7 +45,7 @@ class NoticiaService(val collNoticia:MongoCollection<Noticia>, val collCliente: 
             return null
         }
     }
-
+//buscamos las noticas por los tags añadidos
     fun findByTag(tags: List<String>): List<Noticia>? {
         val filtro = Filters.all("tag", tags)
 
@@ -52,7 +53,7 @@ class NoticiaService(val collNoticia:MongoCollection<Noticia>, val collCliente: 
 
         return noticias
     }
-
+//obtenemos las noticias, las ordeno por el atributo fecha_pub y la limito a 10 para cumplir el requisito
     fun findByFecha(): List<Noticia> {
         val noticias = collNoticia.find().sort(Sorts.descending("fecha_pub")).limit(10).toList()
         return noticias

@@ -24,13 +24,13 @@ fun main() {
 
     val collectionComentario: MongoCollection<Comentario> = database.getCollection("collComentarios", Comentario::class.java)
 
-
+//Creamos los servicios
     val clienteService = ClienteService(collectionUsuario)
 
     val noticiaService: NoticiaService = NoticiaService(collectionNoticias, collectionUsuario)
 
     val comentarioService = ComentarioService(collectionComentario,collectionUsuario,collectionNoticias)
-
+//Bucle para generar las opciones que queremos
     while (true) {
         println("\nMenú:")
         println("1. Registrar usuario")
@@ -56,7 +56,6 @@ fun main() {
                     val telefonos = Utils.getTelefonos()
                     val direccion = Utils.getDireccion()
                     clienteService.insertarCliente(Cliente(_id = email,nombre,nick,true,telefonos,direccion))
-                    println("Fue regsitrado correctamente.")
                 }
 
                 2 -> {

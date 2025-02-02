@@ -8,7 +8,7 @@ import model.Noticia
 
 class ComentarioService(val collComentarios: MongoCollection<Comentario>, val collCliente: MongoCollection<Cliente>, val collNoticia:MongoCollection<Noticia>) {
 
-
+//Al insertar un comentario comprobamos si el usuario existe y este activo, tras eso buscamos si la noticia existe, traseso insertaremos el comentario deseado
     fun insertarComentario(comentario: Comentario, usuario: String, noticia: String) {
 
         val filtroUser = Filters.eq("nick",usuario)
@@ -34,7 +34,7 @@ class ComentarioService(val collComentarios: MongoCollection<Comentario>, val co
             println("No existe el usuario.")
         }
     }
-
+//Filtramos por el nombre de la noticia y comprobamos los comentarios a ver si hay o no
     fun getComentariosByNoticia(noticiaId: String): List<Comentario>? {
         val filtroComentario = Filters.eq("noticia",noticiaId)
 
