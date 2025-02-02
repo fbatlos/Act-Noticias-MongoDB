@@ -20,8 +20,12 @@ class ClienteService(val coll : MongoCollection<Cliente>) {
         val userExist = coll.find(filtros)
 
         if (userExist.count() == 0) {
-            coll.insertOne(cliente)
-            println("Fue regsitrado correctamente.")
+            if (cliente._id.isNotEmpty()  && cliente.nick.isNotEmpty()) {
+                coll.insertOne(cliente)
+                println("Fue regsitrado correctamente.")
+            }else{
+                println("El email y el nickname son campos obligatorios.")
+            }
         }else{
             println("El usuario ya existe.")
         }

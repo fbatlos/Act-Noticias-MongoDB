@@ -17,12 +17,22 @@ class NoticiaService(val collNoticia:MongoCollection<Noticia>, val collCliente: 
 
         if (usuario != null) {
             if (usuario.estado == true){
-                if (noticia.tag.count() > 0){
+                val filtroNoticia = Filters.eq("titulo", noticia.titulo)
+
+                val noticiabd = collNoticia.find(filtroNoticia).firstOrNull()
+
+                if (noticia.tag.count() > 0 && noticia.titulo.isNotEmpty() && noticia.cuerpo.isNotEmpty() && noticiabd == null) {
+
                     noticia.user = usuario.nick
                     collNoticia.insertOne(noticia)
                     println("$noticia se ha publicado perfectamente.")
+
                 }else {
-                    println("No se pueden publicar noticias sin tag.")
+                    if (noticiabd == null) {
+                        println("La noticia requiere de todos los campos.")
+                    }else{
+                        println("El titulo está repetido.")
+                    }
                 }
             }else{
                 println("El usuario está baneado.")

@@ -107,10 +107,13 @@ fun main() {
                 }
 
                 6 -> {
-                    print("Ingrese etiqueta a buscar: ")
-                    val tags = Utils.getTags()
 
-                    noticiaService.findByTag(tags)?.forEach { println(it) }
+                    val tags = Utils.getTags()
+                    if (tags.isEmpty()){
+                        noticiaService.allNoticias()?.forEach { println(it) }
+                    }else{
+                        noticiaService.findByTag(tags)?.forEach { println(it) }
+                    }
                 }
 
                 7 -> noticiaService.findByFecha().forEach { println(it) }

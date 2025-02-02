@@ -19,13 +19,18 @@ class ComentarioService(val collComentarios: MongoCollection<Comentario>, val co
             val noticiaComent = collNoticia.find(Filters.eq("titulo", noticia)).firstOrNull()
 
             if (noticiaComent != null) {
-                comentario.user = usercoment.nick
 
-                comentario.noticia = noticiaComent.titulo
+                if (comentario.comentario.isNotEmpty()) {
+                    comentario.user = usercoment.nick
 
-                collComentarios.insertOne(comentario)
+                    comentario.noticia = noticiaComent.titulo
 
-                println(comentario)
+                    collComentarios.insertOne(comentario)
+
+                    println("$comentario se ha registrado correctamente.")
+                }else{
+                    println("No se puede subir un comentario vacio.")
+                }
             }else{
                 println("No existe la noticia.")
             }
