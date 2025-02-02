@@ -1,0 +1,4 @@
+[GOOD] - 02-02 23:52:12 - Cliente(_id=paco@gmail.coom, nombre=pocls, nick=paco9, estado=true, tlfn=[], direccion=Direccion(calle=Voz, num=12123, cp=5857, ciudad=Puerta)) fue registrado.
+[GOOD] ComentarioService - 02-02 23:56:17 - Comentario(_id=679ff80fe0ea27038a51d989, user=popo1, noticia=2, comentario=Prueba log 1, fech_pub=Sun Feb 02 23:56:15 CET 2025) se ha registrado correctamente.
+[Cliente Fallo] ClienteService - 02-02 23:56:28 - El email y el nickname son campos obligatorios.
+[GOOD] ComentarioService - 02-02 23:56:44 - Se han otorgado 1 comentarios.

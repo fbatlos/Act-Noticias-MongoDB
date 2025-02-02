@@ -9,6 +9,7 @@ import org.bson.types.ObjectId
 import service.ClienteService
 import service.ComentarioService
 import service.NoticiaService
+import utils.Log
 import utils.Utils
 import java.util.*
 
@@ -125,7 +126,7 @@ fun main() {
                 else -> println("Opción inválida")
             }
         }catch (ex:Exception){
-            println("[ERROR]:${ex.message}")
+            Log.escribir(listOf("[ERROR]",ex.toString()))
         }
     }
 
