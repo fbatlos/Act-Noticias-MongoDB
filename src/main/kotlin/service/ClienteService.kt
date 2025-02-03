@@ -29,11 +29,11 @@ class ClienteService(val coll : MongoCollection<Cliente>) {
                 Log.escribir(listOf("[GOOD]",ruta,"$cliente fue registrado."))
             }else{
                 println("El email y el nickname son campos obligatorios.")
-                Log.escribir(listOf("[Cliente Fallo]",ruta,"El email y el nickname son campos obligatorios."))
+                Log.escribir(listOf("[ERROR]",ruta,"El email y el nickname son campos obligatorios."))
             }
         }else{
             println("El usuario ya existe.")
-            Log.escribir(listOf("[Cliente Fallo]",ruta,"El usuario ya existe."))
+            Log.escribir(listOf("[ERROR]",ruta,"El usuario ya existe."))
         }
     }
 

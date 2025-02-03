@@ -1,4 +1,23 @@
-[GOOD] - 02-02 23:52:12 - Cliente(_id=paco@gmail.coom, nombre=pocls, nick=paco9, estado=true, tlfn=[], direccion=Direccion(calle=Voz, num=12123, cp=5857, ciudad=Puerta)) fue registrado.
-[GOOD] ComentarioService - 02-02 23:56:17 - Comentario(_id=679ff80fe0ea27038a51d989, user=popo1, noticia=2, comentario=Prueba log 1, fech_pub=Sun Feb 02 23:56:15 CET 2025) se ha registrado correctamente.
-[Cliente Fallo] ClienteService - 02-02 23:56:28 - El email y el nickname son campos obligatorios.
-[GOOD] ComentarioService - 02-02 23:56:44 - Se han otorgado 1 comentarios.
+[GOOD] ClienteService - 02-03 12:45:24 - Cliente(_id=prueba1@gmail.com, nombre=prueba 1, nick=prueba1, estado=true, tlfn=[], direccion=Direccion(calle=prueba, num=12, cp=1, ciudad=pruebas)) fue registrado.
+[ERROR] ClienteService - 02-03 12:46:14 - El usuario ya existe.
+[ERROR] ClienteService - 02-03 12:46:31 - El email y el nickname son campos obligatorios.
+[GOOD] NoticiaService - 02-03 12:47:40 - Noticia(_id=67a0acdbf769db376a854ae9, titulo=prueba1, cuerpo=noticia prueba1, fecha_pub=Mon Feb 03 12:47:39 CET 2025, tag=[prueba], user=prueba1) se ha publicado perfectamente.
+[ERROR] NoticiaService - 02-03 12:48:11 - El usuario no es correcto.
+[ERROR] NoticiaService - 02-03 12:49:16 - El usuario está baneado.
+[ERROR] NoticiaService - 02-03 12:49:41 - El titulo está repetido.
+[ERROR] NoticiaService - 02-03 12:50:11 - El titulo está repetido.
+[ERROR] NoticiaService - 02-03 12:50:55 - El titulo está repetido.
+[GOOD] NoticiaService - 02-03 12:51:31 - Se dieron todas las noticias.
+[GOOD] NoticiaService - 02-03 12:52:13 - Se encontraron 1 noticias del usuario.
+[ERROR] NoticiaService - 02-03 12:52:20 - No hay noticias de este usuario.
+[GOOD] NoticiaService - 02-03 12:53:00 - Se encontraron 1 noticias con el tag.
+[GOOD] NoticiaService - 02-03 12:53:07 - Se encontraron las 10 ultimas noticias.
+[GOOD] ComentarioService - 02-03 12:54:12 - Comentario(_id=67a0ae64f769db376a854aef, user=paco9, noticia=prueba1, comentario=Buena prueba, fech_pub=Mon Feb 03 12:54:12 CET 2025) se ha registrado correctamente.
+[ERROR] ComentarioService - 02-03 12:54:31 - No se puede subir un comentario vacio.
+[ERROR] ComentarioService - 02-03 12:54:49 - No existe el usuario.
+[ERROR] ComentarioService - 02-03 12:55:00 - El usuario esta inactivo o baneado.
+[ERROR] ComentarioService - 02-03 12:55:23 - No existe la noticia.
+[GOOD] ComentarioService - 02-03 12:55:48 - Se han otorgado 1 comentarios.
+[ERROR] ComentarioService - 02-03 12:55:55 - No existe la noticia.
+[ERROR] NoticiaService - 02-03 13:09:04 - El usuario está baneado.
+[ERROR] NoticiaService - 02-03 13:09:35 - La noticia requiere de todos los campos.

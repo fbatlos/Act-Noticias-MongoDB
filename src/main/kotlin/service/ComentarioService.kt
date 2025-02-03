@@ -41,6 +41,9 @@ class ComentarioService(val collComentarios: MongoCollection<Comentario>, val co
                 Log.escribir(listOf("[ERROR]",ruta,"No existe la noticia."))
             }
 
+        }else if(usercoment?.estado == false){
+            println("El usuario esta inactivo o baneado.")
+            Log.escribir(listOf("[ERROR]",ruta,"El usuario esta inactivo o baneado."))
         }else{
             println("No existe el usuario.")
             Log.escribir(listOf("[ERROR]",ruta,"No existe el usuario."))
